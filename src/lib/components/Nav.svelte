@@ -37,9 +37,6 @@
 
 <div class="app-container">
   <Drawer variant="modal" bind:open>
-    <Header>
-      <Title>GuidePop</Title>
-    </Header>
     <Content>
       <List>
         <!-- Navigation Items -->
@@ -57,7 +54,7 @@
         {/each}
 
         <!-- Spacer to push logout to bottom -->
-        <div class="spacer" />
+        <div class="spacer"></div>
         
         <Separator />
         
