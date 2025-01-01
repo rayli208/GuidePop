@@ -11,25 +11,29 @@ export const authStore = {
     signInWithGoogle: async () => {
         try {
             const provider = new GoogleAuthProvider();
-            // Add scopes if needed
             provider.addScope('profile');
             provider.addScope('email');
 
-            // Configure custom parameters
             provider.setCustomParameters({
                 prompt: 'select_account'
             });
 
             const result = await signInWithPopup(auth, provider);
+            
+            // Create user data with new properties
             const userData: User = {
                 uid: result.user.uid,
                 email: result.user.email || '',
                 displayName: result.user.displayName || '',
                 photoURL: result.user.photoURL || '',
                 firstName: result.user.displayName?.split(' ')[0] || '',
-                lastName: result.user.displayName?.split(' ')[1] || ''
+                lastName: result.user.displayName?.split(' ')[1] || '',
+                isPaying: false,
+                contactNumber: '',
+                age: ''
             };
 
+            // Save to Firestore with merge option to preserve any existing data
             await setDoc(doc(db, 'users', userData.uid), userData, { merge: true });
             user.set(userData);
             return userData;

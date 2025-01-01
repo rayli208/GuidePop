@@ -6,4 +6,7 @@ export interface User {
     photoURL: string;
     firstName?: string;
     lastName?: string;
+    isPaying: boolean;
+    contactNumber: string;
+    age: string;
 }
